@@ -1,32 +1,59 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+
+  <div class="container" align="center">
+    <v-toolbar>
+      <v-btn
+          class="ma-2"
+          dark
+          @click="backHome"
+      >Home
+      </v-btn>
+      &nbsp;
+      <v-btn
+          class="ma-2"
+          @click="logout"
+      >Logout
+      </v-btn>
+
+    </v-toolbar>
+<!--    <ul>
+
+      <li><router-link to="/register">Register</router-link></li>
+    </ul>-->
+    <router-view style="padding-top: 2%"></router-view>
+
   </div>
 </template>
 
+<script>
+
+
+  import router from "@/router";
+  import liff from "@line/liff";
+
+  export default {
+    name:"app",
+    data(){
+      return{
+        title:"Line Shop Exchange"
+      }
+    },
+    methods:{
+      backHome(){
+        router.push("/")
+      },
+      async logout() {
+        sessionStorage.clear()
+        await liff.init({liffId: "1656248565-0xznbqW1"})
+        await liff.logout()
+        await router.push("/")
+        location.reload()
+      }
+    },
+  };
+</script>
+
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
 
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
 </style>
+
