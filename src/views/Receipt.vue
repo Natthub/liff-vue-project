@@ -47,21 +47,27 @@ export default {
       reader.readAsDataURL(files)
     },
     submit() {
-      let formData = new FormData()
-      formData.append("userID",this.$store.state.profile.userId)
-      formData.append("receiptID",this.receiptID)
-      formData.append("image",this.file)
-      axios
-          // eslint-disable-next-line no-undef
-          .post(this.$store.state.apiUrl+"/user/receipt",formData)
-          .then(response => {
-            if(response.data.status == 1){
-              alert("ส่งใบเสร็จสำเร็จ กรุณารอแอดมินให้คะแนน")
-            }else{
-              alert("เลขที่ใบเสร็จนี้ถูกอัปโหลดแล้ว")
-            }
-          })
-          .catch(error => console.log(error))
+      if (this.receiptID != ""){
+        let formData = new FormData()
+        formData.append("userID",this.$store.state.profile.userId)
+        formData.append("receiptID",this.receiptID)
+        formData.append("image",this.file)
+        axios
+            // eslint-disable-next-line no-undef
+            .post(this.$store.state.apiUrl+"/user/receipt",formData)
+            .then(response => {
+              console.log(response.data)
+              if(response.data.status == 1){
+                alert("ส่งใบเสร็จสำเร็จ กรุณารอแอดมินให้คะแนน")
+              }else{
+                alert("เลขที่ใบเสร็จนี้ถูกอัปโหลดแล้ว")
+              }
+            })
+            .catch(error => console.log(error))
+      }else{
+        alert("กรุณากรอกเลขที่ใบเสร็จ")
+      }
+
     }
   }
 }

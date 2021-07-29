@@ -11,7 +11,8 @@ export default new Vuex.Store({
     isLogin: false,
     isRegister: false,
     profile:[],
-    apiUrl:'http://localhost:8080',
+    // apiUrl:'http://localhost:8080',
+    apiUrl:'https://liff-pointshop-go.herokuapp.com',
     userData:[],
     products:[]
   },

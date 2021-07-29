@@ -44,12 +44,12 @@ export default {
           .then(async response => {
             if (response.data.status === 1) {
               await this.$store.dispatch("addUserData")
-              router.push("/")
+              await router.push("/")
             } else {
               console.log(response)
               alert("คุณลงทะเบียนแล้ว")
               this.$store.state.isRegister = true
-              router.push("/")
+              await router.push("/")
             }
           })
           .catch(error => {

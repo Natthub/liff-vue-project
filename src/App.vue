@@ -44,7 +44,6 @@
       },
       async logout() {
         sessionStorage.clear()
-        await liff.init({liffId: "1656248565-0xznbqW1"})
         await liff.logout()
         await router.push("/")
         location.reload()

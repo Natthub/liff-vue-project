@@ -29,7 +29,17 @@
       <h5>สินค้าที่แลกแล้ว</h5>
     </div>
     <div class="row">
-      <h3>{{ $store.state.userData.product }}</h3>
+      <v-data-table
+          :headers="headers"
+          :items="$store.state.userData[0].product"
+          :items-per-page="10"
+          class="elevation-1">
+        <template v-slot:item.image="{ item }">
+          <div class="p-2">
+            <v-img :src="$store.state.apiUrl+'/image/product/'+item.image" :alt="item.name" height="100px" width="100px" @click="openPic(item.image)"/>
+          </div>
+        </template>
+      </v-data-table>
     </div>
   </div>
 </template>
@@ -47,6 +57,11 @@ export default {
   },
   data(){
     return{
+      headers: [
+        { text: '', value: 'image' },
+        { text: 'ชื่อสินค้า', value: 'name' },
+        { text: 'คะแนนที่ใช้แลก', value: 'score' },
+      ]
 
     }
   },
