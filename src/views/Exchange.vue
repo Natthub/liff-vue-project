@@ -8,7 +8,7 @@
       </v-dialog>
       <v-dialog
           v-model="dialogForm"
-          max-width="25%"
+          max-width="100px"
       >
         <v-card>
           <v-card-title>
